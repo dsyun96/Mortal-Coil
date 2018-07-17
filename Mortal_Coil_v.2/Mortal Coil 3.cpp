@@ -75,7 +75,7 @@ int main()
 
 		printScreen();
 
-		//ÀÔ·Â
+		//ìž…ë ¥
 		scanf("x=%d&y=%d&board=", &w, &h);
 		for (int i = 0; i < h; i++)
 			for (int j = 0; j < w; j++)
@@ -86,8 +86,8 @@ int main()
 		int ansX, ansY, exit = 1;
 		for (int j = 0; exit && j < w; j++) {
 			for (int i = 0; exit && i < h; i++) {
-				if (tmp[i][j] == 'X') continue; //½ÃÀÛ ÁöÁ¡ÀÌ ºí·°ÀÏ °æ¿ì ´Ù¸¥ ÁöÁ¡ ¼±ÅÃ
-				convert(tmp, tile); 			//tile¿¡ ¿øº»ÀÎ tmp¸¦ º¯È¯ÇÏ¿© ÀúÀå
+				if (tmp[i][j] == 'X') continue; //ì‹œìž‘ ì§€ì ì´ ë¸”ëŸ­ì¼ ê²½ìš° ë‹¤ë¥¸ ì§€ì  ì„ íƒ
+				convert(tmp, tile); 			//tileì— ì›ë³¸ì¸ tmpë¥¼ ë³€í™˜í•˜ì—¬ ì €ìž¥
 				part_s = clock();
 				if (dfs(tile, j, i)) {
 					ansX = j;
@@ -113,9 +113,9 @@ int main()
 }
 int dfs(int t[][WIDTH], int a, int b)
 {
-	//(a,b)°¡ ÇöÀç À§Ä¡
+	//(a,b)ê°€ í˜„ìž¬ ìœ„ì¹˜
 
-	int k = 0; //½ºÅÃ¿¡ ³²¾ÆÀÖ´Â ÀÚ·á °³¼ö
+	int k = 0; //ìŠ¤íƒì— ë‚¨ì•„ìžˆëŠ” ìžë£Œ ê°œìˆ˜
 	int tile_count = 2;
 	int dy[] = { 0,1,0,-1 };
 	int dx[] = { 1,0,-1,0 };
@@ -125,27 +125,27 @@ int dfs(int t[][WIDTH], int a, int b)
 
 	while (k) {
 		k--;
-		int x = s[k].getX();			  //ÇöÀçÀÇ °¡·ÎÃà ÁÂÇ¥
-		int y = s[k].getY();			  //ÇöÀçÀÇ ¼¼·ÎÃà ÁÂÇ¥
-		int drc = s[k].getDirection();	  //1¿À¸¥ÂÊ 2¾Æ·¡ÂÊ 3¿ÞÂÊ 4À§ÂÊ
-		int tct = s[k].getCount();		  //Å¸ÀÏ ³Ñ¹ö
+		int x = s[k].getX();			  //í˜„ìž¬ì˜ ê°€ë¡œì¶• ì¢Œí‘œ
+		int y = s[k].getY();			  //í˜„ìž¬ì˜ ì„¸ë¡œì¶• ì¢Œí‘œ
+		int drc = s[k].getDirection();	  //1ì˜¤ë¥¸ìª½ 2ì•„ëž˜ìª½ 3ì™¼ìª½ 4ìœ„ìª½
+		int tct = s[k].getCount();		  //íƒ€ì¼ ë„˜ë²„
 
-		t[y][x] = tct; //Áö³ª°£ ÈçÀû
+		t[y][x] = tct; //ì§€ë‚˜ê°„ í”ì 
 
-		int m = move(t, drc, x, y, tct); //Á¤ÇØÁø ¹æÇâÀ¸·Î µÎ°¥·¡ ±æÀÌ ³ª¿Ã ¶§±îÁö
+		int m = move(t, drc, x, y, tct); //ì •í•´ì§„ ë°©í–¥ìœ¼ë¡œ ë‘ê°ˆëž˜ ê¸¸ì´ ë‚˜ì˜¬ ë•Œê¹Œì§€
 
-		//ÇöÀç À§Ä¡¿¡¼± ÀÌµ¿ÇÒ Å¸ÀÏÀÌ m(m=0Àº 0, m=5´Â 2)°³ ÀÖ´Ù
+		//í˜„ìž¬ ìœ„ì¹˜ì—ì„  ì´ë™í•  íƒ€ì¼ì´ m(m=0ì€ 0, m=5ëŠ” 2)ê°œ ìžˆë‹¤
 		int check = 0;
-		int exp_val = explore(t, x, y); //±æÀÇ ³¡ÀÌ 2°³ ÀÖ´ÂÁö °Ë»ç
+		int exp_val = explore(t, x, y); //ê¸¸ì˜ ëì´ 2ê°œ ìžˆëŠ”ì§€ ê²€ì‚¬
 
-		if (exp_val) { //°¡´É
-			int bfs_val = bfs(t); //Å¸ÀÏÀÌ ÀÌ¾îÁ® ÀÖ´ÂÁö °Ë»ç
+		if (exp_val) { //ê°€ëŠ¥
+			int bfs_val = bfs(t); //íƒ€ì¼ì´ ì´ì–´ì ¸ ìžˆëŠ”ì§€ ê²€ì‚¬
 
-			if (bfs_val == 2) { //¼º°ø!!
+			if (bfs_val == 2) { //ì„±ê³µ!!
 				for (int i = 0; i < h; i++) {
 					for (int j = 0; j < w; j++) {
-						if (t[i][j] == 1) printf("¡à ");
-						else if (t[i][j] == 2) printf("¡Ú ");
+						if (t[i][j] == 1) printf("â–¡ ");
+						else if (t[i][j] == 2) printf("â˜… ");
 						else printf("%2d ", t[i][j] - 2);
 					}
 					printf("\n");
@@ -154,16 +154,16 @@ int dfs(int t[][WIDTH], int a, int b)
 
 				return 1;
 			}
-			if (bfs_val && m) { //Å¸ÀÏÀÌ ÀÌ¾îÁ® ÀÖ°í °¥ Å¸ÀÏÀÌ ÀÖ´Ù
+			if (bfs_val && m) { //íƒ€ì¼ì´ ì´ì–´ì ¸ ìžˆê³  ê°ˆ íƒ€ì¼ì´ ìžˆë‹¤
 				for (int i = 0; i < 4; i++) {
 					int nx = x + dx[i];
 					int ny = y + dy[i];
 
 					if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h) && !t[ny][nx]) {
-						if (i == 0) s[k++].init(nx, ny, 1, tct + 1);		 //¿À¸¥ÂÊ
-						else if (i == 1) s[k++].init(nx, ny, 2, tct + 1);	 //¾Æ·¡ÂÊ
-						else if (i == 2) s[k++].init(nx, ny, 3, tct + 1);	 //¿ÞÂÊ
-						else s[k++].init(nx, ny, 4, tct + 1);				 //À§ÂÊ
+						if (i == 0) s[k++].init(nx, ny, 1, tct + 1);		 //ì˜¤ë¥¸ìª½
+						else if (i == 1) s[k++].init(nx, ny, 2, tct + 1);	 //ì•„ëž˜ìª½
+						else if (i == 2) s[k++].init(nx, ny, 3, tct + 1);	 //ì™¼ìª½
+						else s[k++].init(nx, ny, 4, tct + 1);				 //ìœ„ìª½
 					}
 				}
 			}
@@ -176,7 +176,7 @@ int dfs(int t[][WIDTH], int a, int b)
 				}
 			}
 		}
-		else { //ºÒ°¡´É
+		else { //ë¶ˆê°€ëŠ¥
 			for (int i = 0; i < h; i++) {
 				for (int j = 0; j < w; j++) {
 					if (k == 0) return 0;
@@ -200,8 +200,8 @@ int bfs(int t[][WIDTH])
 		}
 	}
 
-	if (catI + catJ < 0) return 2; //Á¤´ä!
-	//(catJ,catI)°¡ ÇöÀç À§Ä¡
+	if (catI + catJ < 0) return 2; //ì •ë‹µ!
+	//(catJ,catI)ê°€ í˜„ìž¬ ìœ„ì¹˜
 
 	int hd = 0, rr = 0;
 	int dy[] = { 0,1,0,-1 };
@@ -214,11 +214,11 @@ int bfs(int t[][WIDTH])
 			c[i][j] = t[i][j];
 
 	q[rr++].init(catJ, catI);
-	c[catI][catJ] = 1; //Áö³ª°£ ÈçÀû
+	c[catI][catJ] = 1; //ì§€ë‚˜ê°„ í”ì 
 
 	while (hd != rr) {
-		int x = q[hd].getX();	 //ÇöÀçÀÇ °¡·ÎÃà ÁÂÇ¥
-		int y = q[hd].getY();	 //ÇöÀçÀÇ ¼¼·ÎÃà ÁÂÇ¥
+		int x = q[hd].getX();	 //í˜„ìž¬ì˜ ê°€ë¡œì¶• ì¢Œí‘œ
+		int y = q[hd].getY();	 //í˜„ìž¬ì˜ ì„¸ë¡œì¶• ì¢Œí‘œ
 		hd++;
 
 		for (int i = 0; i < 4; i++) {
@@ -228,7 +228,7 @@ int bfs(int t[][WIDTH])
 			if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h)) {
 				if (!c[ny][nx]) {
 					q[rr++].init(nx, ny);
-					c[ny][nx] = 1; //Áö³ª°£ ÈçÀû
+					c[ny][nx] = 1; //ì§€ë‚˜ê°„ í”ì 
 				}
 			}
 		}
@@ -236,11 +236,11 @@ int bfs(int t[][WIDTH])
 
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
-			if (c[i][j] == 0) return 0; //ºÒ°¡´É
+			if (c[i][j] == 0) return 0; //ë¶ˆê°€ëŠ¥
 		}
 	}
 
-	return 1; //°¡´É
+	return 1; //ê°€ëŠ¥
 }
 int explore(int t[][WIDTH], int x, int y)
 {
@@ -257,8 +257,8 @@ int explore(int t[][WIDTH], int x, int y)
 				int nx = x + dx[i];
 				int ny = y + dy[i];
 
-				if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h)) { //¹üÀ§ °Ë»ç
-					if (!t[ny][nx]) cnt++; //0ÀÌ¸é Ä«¿îÆÃ
+				if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h)) { //ë²”ìœ„ ê²€ì‚¬
+					if (!t[ny][nx]) cnt++; //0ì´ë©´ ì¹´ìš´íŒ…
 				}
 			}
 
@@ -266,33 +266,33 @@ int explore(int t[][WIDTH], int x, int y)
 			if (vertexNum) {
 				if (abs(x - j) + abs(y - i) > 1) vertexNum--;
 			}
-			if (vertexNum == 2) return 0; //ºÒ°¡´É
+			if (vertexNum == 2) return 0; //ë¶ˆê°€ëŠ¥
 		}
 	}
 
-	return 1; //°¡´É
+	return 1; //ê°€ëŠ¥
 }
 int move(int t[][WIDTH], int d, int &x, int &y, int &tct)
 {
-	//ÀÌµ¿ÇÒ °÷ÀÌ ÇÑ °÷¹Û¿¡ ¾ø´Â °æ¿ì °è¼Ó ÀÌµ¿
-	//µÎ °¡ÁöÀÇ ±æÀÌ ÀÖÀ¸¸é ·çÇÁ Å»Ãâ
+	//ì´ë™í•  ê³³ì´ í•œ ê³³ë°–ì— ì—†ëŠ” ê²½ìš° ê³„ì† ì´ë™
+	//ë‘ ê°€ì§€ì˜ ê¸¸ì´ ìžˆìœ¼ë©´ ë£¨í”„ íƒˆì¶œ
 
 	int count = 1;
 	while (d >= 1 && d <= 4) {
 		if (d == 1) {
-			while (x < w - 1 && !t[y][x + 1]) t[y][++x] = tct;	//¿À¸¥ÂÊ
+			while (x < w - 1 && !t[y][x + 1]) t[y][++x] = tct;	//ì˜¤ë¥¸ìª½
 			if (count) ans[tct - 3] = 'R', ans[tct - 2] = '\0', count--;
 		}
 		else if (d == 3) {
-			while (x > 0 && !t[y][x - 1]) t[y][--x] = tct;		//¿ÞÂÊ
+			while (x > 0 && !t[y][x - 1]) t[y][--x] = tct;		//ì™¼ìª½
 			if (count) ans[tct - 3] = 'L', ans[tct - 2] = '\0', count--;
 		}
 		else if (d == 4) {
-			while (y > 0 && !t[y - 1][x]) t[--y][x] = tct;		//À§ÂÊ
+			while (y > 0 && !t[y - 1][x]) t[--y][x] = tct;		//ìœ„ìª½
 			if (count) ans[tct - 3] = 'U', ans[tct - 2] = '\0', count--;
 		}
 		else if (d == 2) {
-			while (y < h - 1 && !t[y + 1][x]) t[++y][x] = tct;	//¾Æ·¡ÂÊ
+			while (y < h - 1 && !t[y + 1][x]) t[++y][x] = tct;	//ì•„ëž˜ìª½
 			if (count) ans[tct - 3] = 'D', ans[tct - 2] = '\0', count--;
 		}
 
@@ -305,8 +305,8 @@ void convert(char tmp[][WIDTH], int tile[][WIDTH])
 {
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
-			if (tmp[i][j] == '.') tile[i][j] = 0;	//'.'Àº 0À¸·Î
-			else tile[i][j] = 1;					//'X'´Â 1·Î
+			if (tmp[i][j] == '.') tile[i][j] = 0;	//'.'ì€ 0ìœ¼ë¡œ
+			else tile[i][j] = 1;					//'X'ëŠ” 1ë¡œ
 		}
 	}
 }
@@ -321,9 +321,9 @@ int possibleTile(int t[][WIDTH], int x, int y)
 		int nx = x + dx[i];
 		int ny = y + dy[i];
 
-		if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h)) { //¹üÀ§ °Ë»ç
+		if ((nx >= 0 && nx < w) && (ny >= 0 && ny < h)) { //ë²”ìœ„ ê²€ì‚¬
 			if (!t[ny][nx]) {
-				cnt++; //0ÀÌ¸é Ä«¿îÆÃ
+				cnt++; //0ì´ë©´ ì¹´ìš´íŒ…
 				drc = i + 1;
 			}
 		}
@@ -335,12 +335,12 @@ int possibleTile(int t[][WIDTH], int x, int y)
 }
 void printScreen()
 {
-	printf("                                 ¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤\n");
-	printf("                                 ¦¢                                                ¦¢\n");
-	printf("                                 ¦¢       http://www.hacker.org/coil Solution      ¦¢\n");
-	printf("                                 ¦¢                                                ¦¢\n");
-	printf("                                 ¦¢          Made by YunGoon in 2016-05-06         ¦¢\n");
-	printf("                                 ¦¢                                                ¦¢\n");
-	printf("                                 ¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥\n\n");
+	printf("                                 â”Œ------------------------------------------------â”\n");
+	printf("                                 â”‚                                                â”‚\n");
+	printf("                                 â”‚       http://www.hacker.org/coil Solution      â”‚\n");
+	printf("                                 â”‚                                                â”‚\n");
+	printf("                                 â”‚          Made by YunGoon in 2016-05-06         â”‚\n");
+	printf("                                 â”‚                                                â”‚\n");
+	printf("                                 â””------------------------------------------------â”˜\n\n");
 	printf(">> Please enter flashvars element of html embed tag\n>> ");
 }
