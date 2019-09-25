@@ -516,12 +516,6 @@ void nextPos(int &x, int &y, int &dir, int &wall)
 		wall ^= 3;
 		return;
 	}
-
-	/*********************************************************
-	*
-	*                       FUCK YOU
-	*
-	**********************************************************/
 }
 void nextBF(int &x, int &y, int &bw, int &bh, int &ew, int &eh)
 {
