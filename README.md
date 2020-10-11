@@ -1,5 +1,4 @@
 # Mortal-Coil
-## 개요
 [모탈 코일](http://www.hacker.org/coil/) 퍼즐게임을 프로그램으로 해결합니다.
 
 ## 사용법
