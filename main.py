@@ -16,6 +16,7 @@ ret = s.post(url, data=payload)
 
 now, fin = map(int, input('level: ').split())
 
+req = None
 for level in range(now, fin):
     if level == now:
         req = s.get(f'http://www.hacker.org/coil/index.php?gotolevel={level}&go=Go+To+Level')
@@ -24,6 +25,7 @@ for level in range(now, fin):
     value = value[:value.find('"')]
     arr = value.split('&')
 
+    print(arr)
     with open('board_info.txt', 'wt') as f:
         f.write(f'{arr[0][2:]} {arr[1][2:]} {arr[2][6:]}')
 

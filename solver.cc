@@ -24,8 +24,8 @@ void change_color(int n) {
 #endif
 
 //#define PRINT_BOARD
-//#define PRINT_SEPARATE
-//#define PRINT_DEAD_END
+#define PRINT_SEPARATE
+#define PRINT_DEAD_END
 #define PRINT_GO
 #define X first
 #define Y second
@@ -233,7 +233,8 @@ RIGHT_HAND_END:;
 
 	vector<pair<int, int>> walks, visits;
 	for (int flag = 0, init_x = -1, init_y = -1, init_dir = -1, now_x = start_x, now_y = start_y, now_left_hand_dir = hand_dir; ; ) {
-		for (int i = 0; i < 4; ++i) {
+		int i;
+		for (i = 0; i < 4; ++i) {
 			int nxt_x = now_x + dx[(now_left_hand_dir + 1) % 4];
 			int nxt_y = now_y + dy[(now_left_hand_dir + 1) % 4];
 			if (is_valid(nxt_x, nxt_y) && get<0>(bo[nxt_x][nxt_y]) == '.') {
@@ -285,6 +286,7 @@ RIGHT_HAND_END:;
 			}
 			now_left_hand_dir = (now_left_hand_dir + 1) % 4;
 		}
+		if (i == 4) break;
 	}
 
 EXIT:;
@@ -397,8 +399,6 @@ string brute_force(vector<vector<tuple<char, int, int>>>& bo, int start_x, int s
 			qpath.pop_back();
 		}
 		qpath += "URDL"[dir];
-		if (string("RUUDD").substr(0, sz(qpath)) == qpath)
-			int a = 0;
 
 		vector<pair<int, int>> walks;
 		walks.emplace_back(x, y);
