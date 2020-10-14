@@ -32,5 +32,7 @@ for level in range(now, fin):
 
     with open('outurl.txt', 'rt') as f:
         qpathurl = f.read(1 << 15)
+        with open(f'solution/Lv{level}.txt', 'wt') as g:
+            g.write(qpathurl)
 
     req = s.get(qpathurl)
